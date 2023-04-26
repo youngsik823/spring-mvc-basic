@@ -22,4 +22,10 @@ public class PersonSpringRepository {
                 p.getPersonName(), p.getPersonAge());
     }
 
+    // 삭제 기능
+    public void removePerson(long id) {
+        String sql = "DELETE FROM person WHERE id = ?";
+        jdbcTemplate.update(sql, id);
+    }
+
 }

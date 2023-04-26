@@ -21,4 +21,12 @@ class PersonSpringRepositoryTest {
         //when
         repository.savePerson(p);
     }
+
+    @Test
+    void removePersonTest() {
+        // given
+        long id = 4L;
+        // when
+        repository.removePerson(id);
+    }
 }
