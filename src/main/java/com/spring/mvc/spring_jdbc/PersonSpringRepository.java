@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class PersonSpringRepository {
@@ -28,7 +30,7 @@ public class PersonSpringRepository {
         jdbcTemplate.update(sql, id);
     }
 
-    // 수정 기능 1
+    // 수정 기능
     public boolean modify(Person p) {
         String sql = "UPDATE person SET " +
                 "person_name=?, person_age=? " +
@@ -39,10 +41,10 @@ public class PersonSpringRepository {
                 p.getId());
         return result == 1;
     }
-//    // 수정 기능 2
-//    public void updatePerson(long id, String name, String age) {
-//        String sql = "UPDATE person" +
-//                "SET id"
-//    }
+
+    // 전체 조회 기능
+    public List<Person> findAll() {
+
+    }
 
 }
