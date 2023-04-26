@@ -35,7 +35,7 @@ class PersonSpringRepositoryTest {
         // given
         Person p = new Person();
         p.setId(6L);
-        p.setPersonName("만지호");
+        p.setPersonName("김스프링");
         p.setPersonAge(10000);
         // when
         boolean flag = repository.modify(p);

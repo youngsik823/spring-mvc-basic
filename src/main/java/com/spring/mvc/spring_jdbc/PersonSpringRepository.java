@@ -3,8 +3,11 @@ package com.spring.mvc.spring_jdbc;
 import com.spring.mvc.jdbc.Person;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 @Repository
@@ -44,7 +47,17 @@ public class PersonSpringRepository {
 
     // 전체 조회 기능
     public List<Person> findAll() {
-
+        String sql = "SELECT * FROM person";
+         List<Person> personList = jdbcTemplate.query(sql, new RowMapper() {
+             @Override
+             public Person mapRow(ResultSet rs, int rowNum) throws SQLException {
+                 Person p = new Person(rs);
+//                 p.setId(rs.getLong("id"));
+//                 p.setPersonName(rs.getString("person_name"));
+//                 p.setPersonAge(rs.getInt("person_age"));
+                 return p;
+             }
+         });
     }
 
 }
