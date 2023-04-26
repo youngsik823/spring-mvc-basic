@@ -39,10 +39,10 @@ public class PersonSpringRepository {
                 p.getId());
         return result == 1;
     }
-    // 수정 기능 2
-    public void updatePerson(long id, String name, String age) {
-        String sql = "UPDATE person" +
-                "SET id"
-    }
+//    // 수정 기능 2
+//    public void updatePerson(long id, String name, String age) {
+//        String sql = "UPDATE person" +
+//                "SET id"
+//    }
 
 }
