@@ -29,4 +29,17 @@ class PersonSpringRepositoryTest {
         // when
         repository.removePerson(id);
     }
+
+    @Test
+    void modifyPersonTest() {
+        // given
+        Person p = new Person();
+        p.setId(6L);
+        p.setPersonName("만지호");
+        p.setPersonAge(10000);
+        // when
+        boolean flag = repository.modify(p);
+        // then
+        assertTrue(flag);
+    }
 }
