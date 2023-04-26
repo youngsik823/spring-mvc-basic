@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.util.List;
 @Repository
 public class ScoreJdbcRepository implements ScoreRepository{
@@ -34,14 +35,36 @@ public class ScoreJdbcRepository implements ScoreRepository{
     @Override
     public boolean save(Score score) {
 
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
 
-        try(Connection conn= DriverManager.getConnection(url,username,password)){
+            conn.setAutoCommit(false);
 
-        }catch (Exception e){
+            String sql = "INSERT INTO tbl_score " +
+                    " (stu_name, kor, eng, math, total, average, grade) " +
+                    " VALUES (?, ?, ?, ?, ?, ?, ?)";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setString(1, score.getName());
+            pstmt.setInt(2, score.getKor());
+            pstmt.setInt(3, score.getEng());
+            pstmt.setInt(4, score.getMath());
+            pstmt.setInt(5, score.getTotal());
+            pstmt.setDouble(6, score.getAverage());
+            pstmt.setString(7, String.valueOf(score.getGrade()));
+
+            int result = pstmt.executeUpdate(); // 성공시 1, 실패시 0
+
+            if (result == 1) {
+                conn.commit();
+                return true;
+            }
+            conn.rollback();
+            return false;
+
+        } catch (Exception e) {
             e.printStackTrace();
+            return false;
         }
-
-        return false;
     }
 
     @Override
