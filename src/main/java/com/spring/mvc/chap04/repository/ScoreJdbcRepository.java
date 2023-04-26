@@ -4,13 +4,14 @@ import com.spring.mvc.chap04.entity.Score;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.util.List;
+
 @Repository
-public class ScoreJdbcRepository implements ScoreRepository{
-    private String url = "jdbc:mariadb://localhost:3307/spring";
+public class ScoreJdbcRepository implements ScoreRepository {
+
+    private String url = "jdbc:mariadb://localhost:3306/spring";
     private String username = "root";
     private String password = "1234";
 
