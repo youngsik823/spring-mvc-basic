@@ -34,11 +34,11 @@ public class ScoreJdbcRepository implements ScoreRepository {
     public List<Score> findAll(String sort) {
         List<Score> scoreList = new ArrayList<>();
 
-        try(Connection conn = DriverManager.getConnection(url, username, password)) {
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
 
-        String sql = "SELECT * FROM tbl_score";
+            String sql = "SELECT * FROM tbl_score";
 
-        PreparedStatement pstmt = conn.prepareStatement(sql);
+            PreparedStatement pstmt = conn.prepareStatement(sql);
 
             ResultSet rs = pstmt.executeQuery();
 
@@ -90,11 +90,51 @@ public class ScoreJdbcRepository implements ScoreRepository {
 
     @Override
     public boolean deleteByStuNum(int stuNum) {
-        return false;
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
+
+            conn.setAutoCommit(false);
+
+            String sql = "DELETE FROM tbl_score WHERE stu_num=?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, stuNum);
+
+            int result = pstmt.executeUpdate(); // 성공시 1, 실패시 0
+
+            if (result == 1) {
+                conn.commit();
+                return true;
+            }
+            conn.rollback();
+            return false;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     @Override
     public Score findByStuNum(int stuNum) {
+
+        try (Connection conn = DriverManager.getConnection(url, username, password)) {
+
+            String sql = "SELECT * FROM tbl_score WHERE stu_num=?";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            pstmt.setInt(1, stuNum);
+
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return new Score(rs);
+            }
+
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return null;
     }
 }
