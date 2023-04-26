@@ -33,7 +33,7 @@ public class Score {
         this.math = rs.getInt("math");
         this.total = rs.getInt("total");
         this.average = rs.getDouble("average");
-        this.grade = rs.getString("grade");
+        this.grade = Grade.valueOf(rs.getString("grade"));
     }
 
     public void changeScore(ScoreRequestDTO dto) {
