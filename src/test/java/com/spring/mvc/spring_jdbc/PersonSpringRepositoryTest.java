@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -41,5 +43,21 @@ class PersonSpringRepositoryTest {
         boolean flag = repository.modify(p);
         // then
         assertTrue(flag);
+    }
+
+    @Test
+    void findAllTest() {
+        List<Person> people = repository.findAll();
+        for (Person p : people) {
+            System.out.println("p = " + p);
+        }
+    }
+
+    @Test
+    void findOneTest() {
+        Person p = repository.findOne(5L);
+        System.out.println("p = " + p);
+
+        assertEquals("김스프링", p.getPersonName());
     }
 }

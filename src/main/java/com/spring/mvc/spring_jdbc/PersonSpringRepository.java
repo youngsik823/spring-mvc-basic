@@ -1,5 +1,6 @@
 package com.spring.mvc.spring_jdbc;
 
+import com.spring.mvc.chap04.entity.Score;
 import com.spring.mvc.jdbc.Person;
 import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -48,16 +49,17 @@ public class PersonSpringRepository {
     // 전체 조회 기능
     public List<Person> findAll() {
         String sql = "SELECT * FROM person";
-         List<Person> personList = jdbcTemplate.query(sql, new RowMapper() {
-             @Override
-             public Person mapRow(ResultSet rs, int rowNum) throws SQLException {
-                 Person p = new Person(rs);
-//                 p.setId(rs.getLong("id"));
-//                 p.setPersonName(rs.getString("person_name"));
-//                 p.setPersonAge(rs.getInt("person_age"));
-                 return p;
-             }
-         });
+        return jdbcTemplate.query(sql,
+                (rs,  rowNum) -> new Person(rs));
+    }
+
+    // 개별 조회
+    public Person findOne(long id) {
+        String sql = "SELECT * FROM person WHERE id=?";
+        return jdbcTemplate.queryForObject(
+                sql,
+                (rs, n) -> new Person(rs)
+                , id);
     }
 
 }
