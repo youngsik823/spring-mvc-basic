@@ -4,7 +4,7 @@ import com.spring.mvc.chap04.dto.ScoreListResponseDTO;
 import com.spring.mvc.chap04.dto.ScoreRequestDTO;
 import com.spring.mvc.chap04.entity.Score;
 import com.spring.mvc.chap04.repository.ScoreRepository;
-import lombok.RequiredArgsConstructor;
+import com.spring.mvc.chap04.repository.ScoreSpringRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -18,11 +18,11 @@ import java.util.stream.Collectors;
 @Service
 public class ScoreService {
     @Autowired
-    public ScoreService(@Qualifier("jdbc") ScoreRepository scoreRepository) {
-        this.scoreRepository = scoreRepository;
+    public ScoreService(@Qualifier("spring") ScoreSpringRepository repository) {
+        this.repository = repository;
     }
 
-    private final ScoreRepository scoreRepository;
+    private final ScoreSpringRepository repository;
 
     // 목록조회 중간처리
     /*
@@ -35,7 +35,7 @@ public class ScoreService {
 
         // scoreList에서 원하는 정보만 추출하고 이름을 마스킹해서
         // 다시 DTO리스트로 변환해줘야 한다.
-        return scoreRepository.findAll(sort)
+        return repository.findAll(sort)
                     .stream()
                     .map(ScoreListResponseDTO::new)
                     .collect(Collectors.toList());
@@ -49,19 +49,19 @@ public class ScoreService {
     public boolean insertScore(ScoreRequestDTO dto) {
         // dto(ScoreDTO)를 entity(Score)로 변환해야 함.
         // save명령
-        return scoreRepository.save(new Score(dto));
+        return repository.save(new Score(dto));
     }
 
     // 삭제 중간처리
     public boolean delete(int stuNum) {
-        return scoreRepository.deleteByStuNum(stuNum);
+        return repository.deleteByStuNum(stuNum);
     }
 
     // 상세조회, 수정화면조회 중간처리
     public Score retrieve(int stuNum) {
         // 만약에 스코어 전체데이터말고
         // 몇개만 추리고 전후처리해서 줘라
-        return scoreRepository.findByStuNum(stuNum);
+        return repository.findByStuNum(stuNum);
     }
 
 }

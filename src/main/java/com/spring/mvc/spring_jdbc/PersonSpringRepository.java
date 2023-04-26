@@ -50,7 +50,12 @@ public class PersonSpringRepository {
     public List<Person> findAll() {
         String sql = "SELECT * FROM person";
         return jdbcTemplate.query(sql,
-                (rs,  rowNum) -> new Person(rs));
+                new RowMapper<Person>() {
+                    @Override
+                    public Person mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        return new Person(rs);
+                    }
+                });
     }
 
     // 개별 조회
@@ -58,7 +63,12 @@ public class PersonSpringRepository {
         String sql = "SELECT * FROM person WHERE id=?";
         return jdbcTemplate.queryForObject(
                 sql,
-                (rs, n) -> new Person(rs)
+                new RowMapper<Person>() {
+                    @Override
+                    public Person mapRow(ResultSet rs, int n) throws SQLException {
+                        return new Person(rs);
+                    }
+                }
                 , id);
     }
 
