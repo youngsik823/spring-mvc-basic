@@ -34,9 +34,9 @@ class PersonMapperTest {
     void changeTest() {
         //given
         Person p = Person.builder()
-                .personName("영시기")
-                .personAge(26)
-                .id(3L)
+                .personName("지워니")
+                .personAge(29)
+                .id(2L)
                 .build();
         // when
         boolean flag = mapper.change(p);
