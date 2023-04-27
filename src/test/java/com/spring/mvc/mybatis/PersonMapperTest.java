@@ -34,12 +34,24 @@ class PersonMapperTest {
     void changeTest() {
         //given
         Person p = Person.builder()
-                .personName("윤영식")
-                .personAge(88)
+                .personName("영시기")
+                .personAge(26)
                 .id(3L)
                 .build();
         // when
         boolean flag = mapper.change(p);
+
+        //then
+        assertTrue(flag);
+    }
+
+    @Test
+    @DisplayName("마이바티스 매퍼로 사람정보 삭제에 성공해야 한다.")
+    void removeTest() {
+        //given
+        long id = 1L;
+        // when
+        boolean flag = mapper.remove(id);
 
         //then
         assertTrue(flag);
