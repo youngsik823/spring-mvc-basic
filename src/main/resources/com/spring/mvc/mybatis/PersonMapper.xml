@@ -23,4 +23,17 @@
         WHERE id = #{id}
     </delete>
 
+<!--   ORM : 자바객체 필드랑 테이블 컬럼을 매핑-->
+    <resultMap id="person" type="com.spring.mvc.jdbc.Person">
+        <result property="personName" column="person_name" /> <!-- 프로퍼티랑 db 이름이 다르면-->
+        <result property="personAge" column="person_age" />
+    </resultMap>
+    <select id="findAll" resultMap="person">
+        SELECT * FROM person
+    </select>
+
+    <select id="findOne" resultMap="person">
+        SELECT * FROM person
+        WHERE id = #{id}
+    </select>
 </mapper>

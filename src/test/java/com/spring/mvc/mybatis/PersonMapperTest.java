@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -55,5 +57,38 @@ class PersonMapperTest {
 
         //then
         assertTrue(flag);
+    }
+
+    @Test
+    @DisplayName("마이바티스 매퍼로 사람정보 전체조회에 성공해야 한다.")
+    void findAllTest() {
+        //given
+
+        // when
+        List<Person> people = mapper.findAll();
+
+        //then
+
+        for (Person person : people) {
+            System.out.println(person);
+        }
+        assertEquals(2, people.size());
+    }
+
+    @Test
+    @DisplayName("마이바티스 매퍼로 사람정보 개별조회에 성공해야 한다.")
+    void findOneTest() {
+        //given
+        long id = 2L;
+        // when
+        Person p = mapper.findOne(id);
+
+        //then
+        System.out.println("p = " + p);
+        assertEquals("지워니", p.getPersonName());
+        assertEquals(29, p.getPersonAge());
+        assertNotNull(p);
+
+
     }
 }
