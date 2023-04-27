@@ -9,5 +9,11 @@ public interface PersonMapper {
     boolean save(Person p);
     
     // 사람 정부 수정
-    change
+    boolean change(Person p);
+
+    // 사람 정보 삭제
+    boolean remove(long id);
+
+    // 전체 조회
+    findAll();
 }
