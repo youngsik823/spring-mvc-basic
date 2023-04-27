@@ -45,5 +45,10 @@ class ScoreSpringRepositoryTest {
         repository.save(s);
     }
 
+    @Test
+    void modifyScore() {
+
+    }
+
 
 }

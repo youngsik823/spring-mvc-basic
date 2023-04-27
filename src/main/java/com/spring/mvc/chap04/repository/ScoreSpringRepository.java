@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository("spring")
@@ -27,9 +26,22 @@ public class ScoreSpringRepository implements ScoreRepository {
             }
         });
     }
+
     @Override
     public List<Score> findAll(String sort) {
         String sql = "SELECT * FROM tbl_score";
+        switch (sort) {
+            case "num":
+                sql += " ORDER BY stu_num";
+                break;
+            case "name":
+                sql += " ORDER BY stu_name";
+                break;
+            case "avg":
+                sql += " ORDER BY average DESC";
+                break;
+        }
+
         return jdbcTemplate.query(sql, new RowMapper<Score>() {
             @Override
             public Score mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -58,7 +70,7 @@ public class ScoreSpringRepository implements ScoreRepository {
         return result == 1;
     }
 
-    @Override
+    @Override // SELECT 할때만 new RowMapper()을 쓴다.
     public Score findByStuNum(int stuNum) {
         String sql = "SELECT * FROM tbl_score WHERE stu_num=?";
         return jdbcTemplate.queryForObject(sql, new RowMapper<Score>() {
@@ -67,5 +79,13 @@ public class ScoreSpringRepository implements ScoreRepository {
                 return new Score(rs);
             }
         }, stuNum);
+    }
+
+
+    public boolean modifyScore(int kor, int eng, int math, int stuNum) {
+        String sql = "UPDATE tbl_score SET kor = ?, eng = ?, math = ? WHERE stu_num=?";
+        boolean result = jdbcTemplate.update(sql, kor, eng, math, stuNum) == 1;
+        return result;
+
     }
 }
