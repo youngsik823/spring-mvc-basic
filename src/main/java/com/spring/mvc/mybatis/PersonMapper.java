@@ -1,9 +1,11 @@
 package com.spring.mvc.mybatis;
 
 import com.spring.mvc.jdbc.Person;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+@Mapper
 public interface PersonMapper {
 
     // CRUD에 대한 기능 명세
