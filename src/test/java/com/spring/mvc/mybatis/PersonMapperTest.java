@@ -34,7 +34,7 @@ class PersonMapperTest {
     void changeTest() {
         //given
         Person p = Person.builder()
-                .personName("김스프링")
+                .personName("윤영식")
                 .personAge(88)
                 .id(3L)
                 .build();
