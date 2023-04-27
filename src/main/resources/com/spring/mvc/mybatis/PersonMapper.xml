@@ -12,5 +12,10 @@
         (person_name, person_age)
         VALUES (#{personName}, #{personAge})
     </insert>
+    <update id="change">
+        UPDATE person
+        SET person_name = #{personName}, person_age = #{personAge}
+        WHERE id = #{id}
+    </update>
 
 </mapper>

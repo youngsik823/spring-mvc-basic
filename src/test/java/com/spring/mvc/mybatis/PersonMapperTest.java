@@ -29,4 +29,19 @@ class PersonMapperTest {
         assertTrue(flag);
     }
 
+    @Test
+    @DisplayName("마이바티스 매퍼로 사람정보 수정에 성공해야 한다.")
+    void changeTest() {
+        //given
+        Person p = Person.builder()
+                .personName("김스프링")
+                .personAge(88)
+                .id(3L)
+                .build();
+        // when
+        boolean flag = mapper.change(p);
+
+        //then
+        assertTrue(flag);
+    }
 }
