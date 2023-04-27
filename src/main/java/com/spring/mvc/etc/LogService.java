@@ -28,7 +28,7 @@ public class LogService {
         System.out.println("hello log!!");
 
         log.trace("hello trace!!");
-        log.debug("hello trace!!");
+        log.debug("hello debug!!");
         log.info("hello info!!");
         log.warn("hello warn!!");
         log.error("hello error!!");
