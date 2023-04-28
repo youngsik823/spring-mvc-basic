@@ -20,11 +20,11 @@
 <!--    <result property="stuNum" column="stu_num" />-->
 <!--    </resultMap>-->
 
-    <select id="findAll" resultType="com.spring.mvc.chap04.entity.Score">
+    <select id="findAll" resultType="score">
         SELECT * FROM tbl_score
     </select>
 
-    <select id="findByStuNum" resultType="com.spring.mvc.chap04.entity.Score">
+    <select id="findByStuNum" resultType="score">
         SELECT * FROM tbl_score
         WHERE stu_num = #{stuNum}
     </select>
