@@ -1,7 +1,9 @@
 package com.spring.mvc.chap05.controller;
 
+import com.spring.mvc.chap04.entity.Score;
 import com.spring.mvc.chap05.dto.BoardListResponseDTO;
 import com.spring.mvc.chap05.dto.BoardWriteRequestDTO;
+import com.spring.mvc.chap05.entity.Board;
 import com.spring.mvc.chap05.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -60,4 +62,25 @@ public class BoardController {
         return "chap05/detail";
     }
 
+    //수정페이지 보여주기
+    @GetMapping("/again")
+    public String again(int bno, Model model) {
+        System.out.println("/board/again : GET");
+        retrieve(bno, model);
+
+        return "chap05/again";
+    }
+    private void retrieve(int bno, Model model) {
+        Board board = boardService.retrieve(bno);
+        model.addAttribute("a", board);
+    }
+    // 수정완료 값 받아오기
+    @PostMapping("/again")
+    public String again(int bno, BoardWriteRequestDTO dto) {
+        System.out.println("/board/again : POST");
+        Board retrieve = boardService.retrieve(bno);
+
+
+        return "redirect:/board/list";
+    }
 }

@@ -5,12 +5,10 @@ import com.spring.mvc.chap05.dto.BoardListResponseDTO;
 import com.spring.mvc.chap05.dto.BoardWriteRequestDTO;
 import com.spring.mvc.chap05.entity.Board;
 import com.spring.mvc.chap05.repository.BoardMapper;
-import com.spring.mvc.chap05.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 
@@ -49,4 +47,16 @@ public class BoardService {
         boardRepository.upViewCount(bno);
         return new BoardDetailResponseDTO(board);
     }
+
+    public BoardDetailResponseDTO modify(int bno) {
+        Board board = boardRepository.findOne(bno);
+         boardRepository.modify(bno);
+        return new BoardDetailResponseDTO(board);
+    }
+    public Board retrieve(int bno) {
+
+        return boardRepository.findOne(bno);
+    }
+
+
 }
