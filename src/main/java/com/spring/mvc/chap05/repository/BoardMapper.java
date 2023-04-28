@@ -5,7 +5,8 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
-public interface BoardRepository {
+@Mapper
+public interface BoardMapper {
 
     // 게시물 목록 조회
     List<Board> findAll();

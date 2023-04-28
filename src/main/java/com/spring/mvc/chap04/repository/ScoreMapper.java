@@ -17,4 +17,5 @@ public interface ScoreMapper {
 
     // 성적 정보 개별 조회
     Score findByStuNum(int stuNum);
+
 }

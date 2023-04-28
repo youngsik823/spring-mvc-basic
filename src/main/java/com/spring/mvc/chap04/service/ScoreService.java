@@ -8,6 +8,7 @@ import com.spring.mvc.chap04.repository.ScoreSpringRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -67,5 +68,6 @@ public class ScoreService {
         // 몇개만 추리고 전후처리해서 줘라
         return repository.findByStuNum(stuNum);
     }
+
 
 }
