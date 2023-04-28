@@ -20,7 +20,7 @@ class ScoreMapperTest {
     void saveTest() {
 //        stu_name, kor, eng, math, total, average, grade
         Score s = Score.builder()
-                .name("윤영식")
+                .stuName("윤영식")
                 .kor(100)
                 .eng(100)
                 .math(100)
@@ -33,19 +33,6 @@ class ScoreMapperTest {
         assertTrue(flag);
 
     }
-//    void modifyTest() {
-//        Score s = Score.builder()
-//                .name("윤영식")
-//                .kor(100)
-//                .eng(100)
-//                .math(100)
-//                .total(300)
-//                .average(100)
-//                .grade(Grade.A)
-//                .build();
-//        boolean flag = mapper.save(s);
-//
-//        assertTrue(flag);
-//    }
+
 
 }

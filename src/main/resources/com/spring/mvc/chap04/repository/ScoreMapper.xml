@@ -7,7 +7,7 @@
     <insert id="save">
         INSERT INTO tbl_score
         (stu_name, kor, eng, math, total, average, grade)
-        VALUES (#{name}, #{kor}, #{eng}, #{math}, #{total}, #{average}, #{grade})
+        VALUES (#{stuName}, #{kor}, #{eng}, #{math}, #{total}, #{average}, #{grade})
     </insert>
 
     <delete id="deleteByStuNum">
@@ -15,16 +15,16 @@
         WHERE stu_num = #{stuNum}
     </delete>
 
-    <resultMap id="scoreInfo" type="com.spring.mvc.chap04.entity.Score">
-    <result property="name" column="stu_name" />
-    <result property="stuNum" column="stu_num" />
-    </resultMap>
+<!--    <resultMap id="sc" type="com.spring.mvc.chap04.entity.Score">-->
+<!--    <result property="stuName" column="stu_name" />-->
+<!--    <result property="stuNum" column="stu_num" />-->
+<!--    </resultMap>-->
 
-    <select id="findAll" resultMap="scoreInfo">
+    <select id="findAll" resultType="com.spring.mvc.chap04.entity.Score">
         SELECT * FROM tbl_score
     </select>
 
-    <select id="findByStuNum" resultMap="scoreInfo">
+    <select id="findByStuNum" resultType="com.spring.mvc.chap04.entity.Score">
         SELECT * FROM tbl_score
         WHERE stu_num = #{stuNum}
     </select>

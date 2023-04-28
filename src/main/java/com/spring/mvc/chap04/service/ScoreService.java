@@ -17,14 +17,16 @@ import java.util.stream.Collectors;
 //@RequiredArgsConstructor // scoreRepository를 초기화 하기위함
 @Service
 public class ScoreService {
+
+    private final ScoreMapper repository;
+    //    private final ScoreSpringRepository repository;
     @Autowired
     public ScoreService(ScoreMapper repository) {
 
         this.repository = repository;
     }
 
-    private final ScoreMapper repository;
-//    private final ScoreSpringRepository repository;
+
 
     // 목록조회 중간처리
     /*

@@ -38,7 +38,7 @@ class ScoreSpringRepositoryTest {
     @Test
     void save() {
         Score s = new Score();
-        s.setName("아이스아메리카노");
+        s.setStuName("아이스아메리카노");
         s.setKor(44);
         s.setEng(55);
         s.setMath(66);
