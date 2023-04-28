@@ -25,7 +25,7 @@
         VALUES (#{title}, #{content})
     </insert>
 
-    <delete id="">
+    <delete id="deleteByNo">
         DELETE FROM tbl_board
         WHERE board_no = #{boardNO}
     </delete>
