@@ -1,7 +1,6 @@
 package com.spring.mvc.spring_jdbc;
 
 import com.spring.mvc.jdbc.Person;
-import org.eclipse.jdt.internal.compiler.ast.EqualExpression;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,13 +11,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class PersonSpringRepositoryTest {
-
     @Autowired
     PersonSpringRepository repository;
 
     @Test
     void savePersonTest() {
-        // given
+        //given
         Person p = new Person();
         p.setPersonName("김스프링");
         p.setPersonAge(2);
@@ -30,7 +28,7 @@ class PersonSpringRepositoryTest {
     void removePersonTest() {
         // given
         long id = 4L;
-        //when
+        // when
         repository.removePerson(id);
     }
 
@@ -39,7 +37,7 @@ class PersonSpringRepositoryTest {
         // given
         Person p = new Person();
         p.setId(6L);
-        p.setPersonName("만지호");
+        p.setPersonName("김스프링");
         p.setPersonAge(10000);
         // when
         boolean flag = repository.modify(p);
@@ -60,7 +58,6 @@ class PersonSpringRepositoryTest {
         Person p = repository.findOne(5L);
         System.out.println("p = " + p);
 
-        assertEquals("춘식이", p.getPersonName());
+        assertEquals("김스프링", p.getPersonName());
     }
-
 }

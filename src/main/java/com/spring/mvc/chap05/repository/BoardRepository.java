@@ -1,6 +1,7 @@
 package com.spring.mvc.chap05.repository;
 
 import com.spring.mvc.chap05.entity.Board;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 

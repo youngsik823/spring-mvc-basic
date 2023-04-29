@@ -20,7 +20,8 @@
 
     <link rel="stylesheet" href="/assets/css/main.css">
 
-    
+    <!-- ck editor -->
+    <script src="https://cdn.ckeditor.com/4.17.2/standard/ckeditor.js"></script>
     <style>
         
         
@@ -41,18 +42,13 @@
             margin-bottom: 20px;
             color: #ffffff;
         }
-        .form-container h2 {
-            font-size: 30px;
-            color: #222;
-            text-align: center;
-            margin-bottom: 20px;
-        }
         label {
             display: block;
             margin-bottom: 5px;
             font-size: 20px;
         }
-        #title{
+        input[type="text"],
+        textarea {
             font-size: 18px;
             width: 100%;
             padding: 8px;
@@ -62,18 +58,6 @@
             margin-bottom: 10px;
             background-color: rgba(255, 255, 255, 0.8);
         }
-        #content {
-            height: 400px;
-            font-size: 18px;
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-            border: 2px solid #ffffff;
-            border-radius: 8px;
-            margin-bottom: 10px;
-            background-color: rgba(255, 255, 255, 0.8);
-        }
-
         textarea {
             resize: none;
             height: 200px;
@@ -104,28 +88,24 @@
         button.list-btn:hover {
             background: #e61e8c93;
         }
-        button.list-mbtn {
-            background: #3df;
-        }
-        button.list-mbtn:hover {
-            background: #e61e8c93;
-        }
     </style>
 </head>
 <body>
     <div id="wrap" class="form-container">
-        <h1>${b.boardNo}번 게시물 내용~ </h1>
-        <h2># 작성일자: ${b.date}</h2>
-        <label for="title">제목</label>
-        <input type="text" id="title" name="title" value="${b.title}" readonly>
-        <label for="content">내용</label>
-        <div id="content">${b.content}</div>
-        <div class="buttons">
-            <button class="list-mbtn" type="button" onclick="window.location.href='/board/again?bno=${b.boardNo}'">수정</button>
-            <button class="list-btn" type="button" onclick="window.location.href='/board/list'">목록</button>
-        </div>
-       
-        
+        <h1>꾸러기 게시판 글쓰기</h1>
+        <form action="/board/again" method="post">
+            <input type="hidden" name="bno" value="${a.boardNo}">
+            <label for="title">제목</label>
+            <input type="text" id="title" name="title" value="${a.title}" required>
+            <label for="content">내용</label>
+            <textarea id="content" name="content" maxlength="200" required>${a.content}</textarea>
+            <div class="buttons">
+                <button type="submit">수정완료</button>
+            </div>
+        </form>
     </div>
+    <script>
+        CKEDITOR.replace('content');
+    </script>
 </body>
 </html>

@@ -1,7 +1,9 @@
 package com.spring.mvc.chap05.controller;
 
+import com.spring.mvc.chap05.dto.BoardDetailResponseDTO;
 import com.spring.mvc.chap05.dto.BoardListResponseDTO;
 import com.spring.mvc.chap05.dto.BoardWriteRequestDTO;
+import com.spring.mvc.chap05.entity.Board;
 import com.spring.mvc.chap05.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -58,6 +60,24 @@ public class BoardController {
         System.out.println("/board/detail : GET");
         model.addAttribute("b", boardService.getDetail(bno));
         return "chap05/detail";
+    }
+
+    //수정페이지 보여주기
+    @GetMapping("/again")
+    public String again(int bno, Model model) {
+        System.out.println("/board/again : GET");
+        BoardDetailResponseDTO board = boardService.getDetail(bno);
+        model.addAttribute("a", board);
+
+        return "chap05/again";
+    }
+
+    // 수정완료 값 받아오기
+    @PostMapping("/again")
+    public String again(int bno, BoardWriteRequestDTO dto) {
+        System.out.println("/board/again : POST");
+        boardService.retrieve(bno, dto);
+        return "redirect:/board/detail?bno="+bno;
     }
 
 }

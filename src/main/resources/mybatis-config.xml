@@ -21,5 +21,4 @@
         <mapper resource="mappers/BoardMapper.xml" />
     </mappers>
 
-
 </configuration>

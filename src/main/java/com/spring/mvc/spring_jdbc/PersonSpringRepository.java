@@ -37,8 +37,8 @@ public class PersonSpringRepository {
     // 수정 기능
     public boolean modify(Person p) {
         String sql = "UPDATE person SET " +
-                    "person_name=?, person_age=? " +
-                    "WHERE id = ?";
+                "person_name=?, person_age=? " +
+                "WHERE id = ?";
         int result = jdbcTemplate.update(sql,
                 p.getPersonName(),
                 p.getPersonAge(),
@@ -50,7 +50,12 @@ public class PersonSpringRepository {
     public List<Person> findAll() {
         String sql = "SELECT * FROM person";
         return jdbcTemplate.query(sql,
-                (rs,  rowNum) -> new Person(rs));
+                new RowMapper<Person>() {
+                    @Override
+                    public Person mapRow(ResultSet rs, int rowNum) throws SQLException {
+                        return new Person(rs);
+                    }
+                });
     }
 
     // 개별 조회
@@ -58,7 +63,12 @@ public class PersonSpringRepository {
         String sql = "SELECT * FROM person WHERE id=?";
         return jdbcTemplate.queryForObject(
                 sql,
-                (rs, n) -> new Person(rs)
+                new RowMapper<Person>() {
+                    @Override
+                    public Person mapRow(ResultSet rs, int n) throws SQLException {
+                        return new Person(rs);
+                    }
+                }
                 , id);
     }
 
