@@ -4,12 +4,11 @@ import com.spring.mvc.chap05.dto.BoardDetailResponseDTO;
 import com.spring.mvc.chap05.dto.BoardListResponseDTO;
 import com.spring.mvc.chap05.dto.BoardWriteRequestDTO;
 import com.spring.mvc.chap05.entity.Board;
-import com.spring.mvc.chap05.repository.BoardRepository;
+import com.spring.mvc.chap05.repository.BoardMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 
@@ -17,7 +16,8 @@ import static java.util.stream.Collectors.*;
 @RequiredArgsConstructor
 public class BoardService {
 
-    private final BoardRepository boardRepository;
+//    private final BoardRepository boardRepository;
+    private final BoardMapper boardRepository;
 
     // 중간처리 기능 자유롭게 사용
     // 목록 중간처리
@@ -43,8 +43,18 @@ public class BoardService {
 
         Board board = boardRepository.findOne(bno);
         // 조회수 상승 처리
-        board.setViewCount(board.getViewCount() + 1);
-
+//        board.setViewCount(board.getViewCount() + 1);
+        boardRepository.upViewCount(bno);
         return new BoardDetailResponseDTO(board);
     }
+
+    public boolean retrieve(int bno, BoardWriteRequestDTO dto) {
+        Board board = new Board(dto);
+        board.setBoardNo(bno);
+        return boardRepository.modify(board);
+    }
+
+
+
+
 }

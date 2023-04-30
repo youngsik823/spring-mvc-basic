@@ -3,9 +3,11 @@ package com.spring.mvc.chap05.repository;
 import com.spring.mvc.chap05.entity.Board;
 import org.springframework.stereotype.Repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.*;
 
 import static java.util.Comparator.comparing;
 import static java.util.stream.Collectors.toList;
@@ -44,6 +46,14 @@ public class BoardRepositoryImpl
     @Override
     public boolean save(Board board) {
         board.setBoardNo(++sequence);
+
+        LocalDateTime regDateTime = board.getRegDateTime();
+        Date ddd = Date.from(regDateTime.atZone(ZoneId.systemDefault()).toInstant());
+        System.out.println("ddd = " + ddd);
+
+        LocalDateTime eee = new Timestamp(ddd.getTime()).toLocalDateTime();
+        System.out.println("eee = " + eee);
+
         boardMap.put(board.getBoardNo(), board);
         return true;
     }
@@ -53,4 +63,8 @@ public class BoardRepositoryImpl
         boardMap.remove(boardNo);
         return true;
     }
+
+
+
+
 }

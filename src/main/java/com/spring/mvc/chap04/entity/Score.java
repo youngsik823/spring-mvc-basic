@@ -3,13 +3,17 @@ package com.spring.mvc.chap04.entity;
 import com.spring.mvc.chap04.dto.ScoreRequestDTO;
 import lombok.*;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 @Setter @Getter
 @ToString @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Score {
 
-    private String name; // 학생 이름
+    private String stuName; // 학생 이름
     private int kor, eng, math; // 국, 영, 수 점수
 
     private int stuNum; // 학번
@@ -18,8 +22,19 @@ public class Score {
     private Grade grade; // 학점
 
     public Score(ScoreRequestDTO dto) {
-        this.name = dto.getName();
+        this.stuName = dto.getName();
         changeScore(dto);
+    }
+
+    public Score(ResultSet rs) throws SQLException {
+        this.stuNum = rs.getInt("stu_num");
+        this.stuName = rs.getString("stu_name");
+        this.kor = rs.getInt("kor");
+        this.eng = rs.getInt("eng");
+        this.math = rs.getInt("math");
+        this.total = rs.getInt("total");
+        this.average = rs.getDouble("average");
+        this.grade = Grade.valueOf(rs.getString("grade"));
     }
 
     public void changeScore(ScoreRequestDTO dto) {
