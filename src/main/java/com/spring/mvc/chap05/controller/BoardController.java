@@ -25,6 +25,7 @@ public class BoardController {
         System.out.println("/board/list : GET");
         List<BoardListResponseDTO> responseDTOS
                 = boardService.getList();
+        System.out.println(responseDTOS);
         model.addAttribute("bList", responseDTOS);
         return "chap05/list";
     }
