@@ -4,6 +4,7 @@ import com.spring.mvc.chap05.dto.BoardDetailResponseDTO;
 import com.spring.mvc.chap05.dto.BoardListResponseDTO;
 import com.spring.mvc.chap05.dto.BoardWriteRequestDTO;
 import com.spring.mvc.chap05.dto.page.Page;
+import com.spring.mvc.chap05.dto.page.PageMaker;
 import com.spring.mvc.chap05.entity.Board;
 import com.spring.mvc.chap05.service.BoardService;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,9 @@ public class BoardController {
         log.info("page : {}", page);
         List<BoardListResponseDTO> responseDTOS
                 = boardService.getList(page);
+
+        // 페이징 알고리즘 작동
+        PageMaker maker = new PageMaker(page, boardService.getCount());
         model.addAttribute("bList", responseDTOS);
         return "chap05/list";
     }
