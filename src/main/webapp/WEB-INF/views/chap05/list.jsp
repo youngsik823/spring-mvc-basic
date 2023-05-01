@@ -17,6 +17,9 @@
     <!-- fontawesome css: https://fontawesome.com -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css">
 
+    <!-- bootstrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/list.css">
 
@@ -61,7 +64,29 @@
                     </div>
                 </div>
             </c:forEach>
+        </div>
+        
+        <!-- 게시글 목록 하단 영역 -->
+        <div class="bottom-section">
 
+            <!-- 페이지 버튼 영역 -->
+            <nav aria-label="Page navigation example">
+                <ul class="pagination pagination-lg pagination-custom">
+
+                    
+                    <li class="page-item"><a class="page-link" href="#">prev</a></li>
+                    
+
+                    
+                    <li data-page-num="1" class="page-item">
+                        <a class="page-link" href="/board/list?pageNo=1">1</a>
+                    </li>
+                    
+
+                    <li class="page-item"><a class="page-link" href="#">next</a></li>
+                    
+                </ul>
+            </nav>
 
         </div>
 
