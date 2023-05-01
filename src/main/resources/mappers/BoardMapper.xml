@@ -42,4 +42,8 @@
         set title = #{title} ,content = #{content}
         where board_no = #{boardNo}
     </update>
+
+    <select id="count" resultType="int">
+        select count(*) from tbl_board
+    </select>
 </mapper>

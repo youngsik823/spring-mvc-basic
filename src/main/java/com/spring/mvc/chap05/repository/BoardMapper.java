@@ -30,4 +30,6 @@ public interface BoardMapper {
 
     boolean modify(Board board);
 
+    // 총게시물 개수
+    int count();
 }

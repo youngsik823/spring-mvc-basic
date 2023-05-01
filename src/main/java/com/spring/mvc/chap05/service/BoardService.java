@@ -56,6 +56,7 @@ public class BoardService {
     }
 
 
-
-
+    public int getCount() {
+        return boardRepository.count();
+    }
 }
