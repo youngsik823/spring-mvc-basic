@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class PageMakerTest {
 
     @Test
-    Void pageTest() {
+    void pageTest() {
         // 클라이언트의 페이지 정보
         Page page = new Page();
         page.setPageNo(3);
