@@ -12,7 +12,7 @@ public class PageMaker {
     private static final int PAGE_COUNT = 5;
 
     // 화면 렌더링시 페이지의 시작값과 끝값
-    private int begin, end;
+    private int begin, end, finalPage;
 
     // 이전, 다음 버튼 활성화 여부
     private boolean prev, next;
@@ -41,25 +41,29 @@ public class PageMaker {
         this.begin = this.end - PAGE_COUNT + 1;
 
         /*
+
         - 총 게시물수가 237개고, 한 화면당 10개의 게시물을 배치하고 있다면
           페이지 구간은
+
           1 ~ 10페이지 구간 : 게시물 100개
           11 ~ 20페이지 구간: 게시물 100개
           21 ~ 24페이지 구간: 게시물 37개
+
         - 마지막 페이지 구간에서는 보정이 필요함.
+
         - 마지막 구간 끝페이지 보정 공식:
           올림처리(총 게시물 수 / 한 페이지당 배치할 게시물 수)
+
          */
-        int realEnd = (int) Math.ceil((double)totalCount / page.getAmount());
+        this.finalPage = (int) Math.ceil((double)totalCount / page.getAmount());
 
         // 마지막 페이지 구간에서만 엔드보정이 일어나야 함
-        if (realEnd < this.end) this.end = realEnd;
+        if (this.finalPage < this.end) this.end = this.finalPage;
 
         // 이전 버튼 활성화 여부
         this.prev = begin > 1;
-
         // 다음 버튼 활성화 여부
-        this.next = end < realEnd;
+        this.next = end < this.finalPage;
 
     }
 
