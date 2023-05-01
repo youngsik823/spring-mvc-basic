@@ -84,7 +84,7 @@
                 </c:forEach>
                     
                 <c:if test="${maker.next}">
-                    <li class="page-item"><a class="page-link" href="#">next</a></li>
+                    <li class="page-item"><a class="page-link" href="/board/list?pageNo=${maker.end + 1}">next</a></li>
                 </c:if>    
                 </ul>
             </nav>
