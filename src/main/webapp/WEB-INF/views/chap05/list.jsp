@@ -74,7 +74,7 @@
                 <ul class="pagination pagination-lg pagination-custom">
 
                     <c:if test="${maker.prev}">
-                    <li class="page-item"><a class="page-link" href="#">prev</a></li>
+                    <li class="page-item"><a class="page-link" href="/board/list?pageNo=${maker.begin - 1}">prev</a></li>
                     </c:if>
     
                     <c:forEach var="i" begin="${maker.begin}" end="${maker.end}"> 
