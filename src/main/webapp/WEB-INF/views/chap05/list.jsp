@@ -73,7 +73,7 @@
         <!-- 게시글 목록 하단 영역 -->
         <div class="bottom-section">
 
-            <<!-- 페이지 버튼 영역 -->
+            <!-- 페이지 버튼 영역 -->
             <nav aria-label="Page navigation example">
                 <ul class="pagination pagination-lg pagination-custom">
 
