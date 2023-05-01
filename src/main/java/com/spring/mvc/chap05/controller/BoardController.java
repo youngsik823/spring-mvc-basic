@@ -36,6 +36,7 @@ public class BoardController {
         // 페이징 알고리즘 작동
         PageMaker maker = new PageMaker(page, boardService.getCount());
         model.addAttribute("bList", responseDTOS);
+        model.addAttribute("maker", maker);
         return "chap05/list";
     }
 

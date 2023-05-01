@@ -76,12 +76,12 @@
                     
                     <li class="page-item"><a class="page-link" href="#">prev</a></li>
                     
-
-                    
-                    <li data-page-num="1" class="page-item">
-                        <a class="page-link" href="/board/list?pageNo=1">1</a>
+    
+                    <c:forEach var="i" begin="${maker.begin}" end="${maker.end}"> 
+                    <li data-page-num="${i}" class="page-item">
+                        <a class="page-link" href="/board/list?pageNo=${i}">${i}</a>
                     </li>
-                    
+                </c:forEach>
 
                     <li class="page-item"><a class="page-link" href="#">next</a></li>
                     
