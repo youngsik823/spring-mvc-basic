@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.*;
 
 @Service
 @RequiredArgsConstructor
@@ -46,9 +46,15 @@ public class BoardService {
         // 조회수 상승 처리
 //        board.setViewCount(board.getViewCount() + 1);
         boardRepository.upViewCount(bno);
-
         return new BoardDetailResponseDTO(board);
     }
+
+    public boolean retrieve(int bno, BoardWriteRequestDTO dto) {
+        Board board = new Board(dto);
+        board.setBoardNo(bno);
+        return boardRepository.modify(board);
+    }
+
 
     public int getCount(Search search) {
         return boardRepository.count(search);

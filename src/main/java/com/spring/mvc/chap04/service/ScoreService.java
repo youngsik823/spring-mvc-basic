@@ -4,27 +4,30 @@ import com.spring.mvc.chap04.dto.ScoreListResponseDTO;
 import com.spring.mvc.chap04.dto.ScoreRequestDTO;
 import com.spring.mvc.chap04.entity.Score;
 import com.spring.mvc.chap04.repository.ScoreMapper;
-import com.spring.mvc.chap04.repository.ScoreRepository;
+import com.spring.mvc.chap04.repository.ScoreSpringRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 // 컨트롤러와 레파지토리 사이 비즈니스 로직 처리
 // ex) 트랜잭션 처리, 예외처리, dto변환처리
-//@RequiredArgsConstructor
+//@RequiredArgsConstructor // scoreRepository를 초기화 하기위함
 @Service
 public class ScoreService {
 
-//    private final ScoreRepository scoreRepository;
-    private final ScoreMapper scoreRepository;
-
+    private final ScoreMapper repository;
+    //    private final ScoreSpringRepository repository;
     @Autowired
-    public ScoreService(ScoreMapper scoreRepository) {
-        this.scoreRepository = scoreRepository;
+    public ScoreService(ScoreMapper repository) {
+
+        this.repository = repository;
     }
+
+
 
     // 목록조회 중간처리
     /*
@@ -37,11 +40,10 @@ public class ScoreService {
 
         // scoreList에서 원하는 정보만 추출하고 이름을 마스킹해서
         // 다시 DTO리스트로 변환해줘야 한다.
-        return scoreRepository.findAll(sort)
+        return repository.findAll(sort)
                     .stream()
                     .map(ScoreListResponseDTO::new)
                     .collect(Collectors.toList());
-
     }
 
 
@@ -52,19 +54,20 @@ public class ScoreService {
     public boolean insertScore(ScoreRequestDTO dto) {
         // dto(ScoreDTO)를 entity(Score)로 변환해야 함.
         // save명령
-        return scoreRepository.save(new Score(dto));
+        return repository.save(new Score(dto));
     }
 
     // 삭제 중간처리
     public boolean delete(int stuNum) {
-        return scoreRepository.deleteByStuNum(stuNum);
+        return repository.deleteByStuNum(stuNum);
     }
 
     // 상세조회, 수정화면조회 중간처리
     public Score retrieve(int stuNum) {
         // 만약에 스코어 전체데이터말고
         // 몇개만 추리고 전후처리해서 줘라
-        return scoreRepository.findByStuNum(stuNum);
+        return repository.findByStuNum(stuNum);
     }
+
 
 }

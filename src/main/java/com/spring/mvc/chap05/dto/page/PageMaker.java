@@ -41,19 +41,14 @@ public class PageMaker {
         this.begin = this.end - PAGE_COUNT + 1;
 
         /*
-
         - 총 게시물수가 237개고, 한 화면당 10개의 게시물을 배치하고 있다면
           페이지 구간은
-
           1 ~ 10페이지 구간 : 게시물 100개
           11 ~ 20페이지 구간: 게시물 100개
           21 ~ 24페이지 구간: 게시물 37개
-
         - 마지막 페이지 구간에서는 보정이 필요함.
-
         - 마지막 구간 끝페이지 보정 공식:
           올림처리(총 게시물 수 / 한 페이지당 배치할 게시물 수)
-
          */
         this.finalPage = (int) Math.ceil((double)totalCount / page.getAmount());
 

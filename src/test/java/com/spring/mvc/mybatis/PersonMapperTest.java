@@ -36,9 +36,9 @@ class PersonMapperTest {
     void changeTest() {
         //given
         Person p = Person.builder()
-                .personName("마바수정")
-                .personAge(88)
-                .id(3L)
+                .personName("지워니")
+                .personAge(29)
+                .id(2L)
                 .build();
         // when
         boolean flag = mapper.change(p);
@@ -51,9 +51,10 @@ class PersonMapperTest {
     @DisplayName("마이바티스 매퍼로 사람정보 삭제에 성공해야 한다.")
     void removeTest() {
         //given
-        long id = 6L;
+        long id = 1L;
         // when
         boolean flag = mapper.remove(id);
+
         //then
         assertTrue(flag);
     }
@@ -65,25 +66,29 @@ class PersonMapperTest {
 
         // when
         List<Person> people = mapper.findAll();
+
         //then
+
         for (Person person : people) {
             System.out.println(person);
         }
-        assertEquals(5, people.size());
+        assertEquals(2, people.size());
     }
 
     @Test
     @DisplayName("마이바티스 매퍼로 사람정보 개별조회에 성공해야 한다.")
     void findOneTest() {
         //given
-        long id = 5L;
+        long id = 2L;
         // when
         Person p = mapper.findOne(id);
+
         //then
         System.out.println("p = " + p);
-        assertEquals("춘식이", p.getPersonName());
-        assertEquals(5, p.getPersonAge());
+        assertEquals("지워니", p.getPersonName());
+        assertEquals(29, p.getPersonAge());
         assertNotNull(p);
-    }
 
+
+    }
 }
