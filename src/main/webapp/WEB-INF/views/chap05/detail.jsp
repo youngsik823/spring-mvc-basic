@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,10 +10,8 @@
     <title>게시판 글쓰기</title>
 
     <%@ include file="../include/static-head.jsp" %>
-    
+
     <style>
-        
-        
         .form-container {
             width: 500px;
             margin: auto;
@@ -22,6 +21,7 @@
             border-radius: 4px;
             font-size: 18px;
         }
+
         .form-container h1 {
             font-size: 40px;
             font-weight: 700;
@@ -30,18 +30,21 @@
             margin-bottom: 20px;
             color: #ffffff;
         }
+
         .form-container h2 {
             font-size: 30px;
             color: #222;
             text-align: center;
             margin-bottom: 20px;
         }
+
         label {
             display: block;
             margin-bottom: 5px;
             font-size: 20px;
         }
-        #title{
+
+        #title {
             font-size: 18px;
             width: 100%;
             padding: 8px;
@@ -51,6 +54,7 @@
             margin-bottom: 10px;
             background-color: rgba(255, 255, 255, 0.8);
         }
+
         #content {
             height: 400px;
             font-size: 18px;
@@ -67,11 +71,13 @@
             resize: none;
             height: 200px;
         }
+
         .buttons {
             display: flex;
             justify-content: flex-end;
             margin-top: 20px;
         }
+
         button {
             font-size: 20px;
             padding: 10px 20px;
@@ -84,17 +90,21 @@
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             transition: background-color 0.3s;
         }
+
         button.list-btn {
             background: #e61e8c;
         }
+
         button:hover {
             background-color: #3d8b40;
         }
+
         button.list-btn:hover {
             background: #e61e8c93;
         }
     </style>
 </head>
+
 <body>
 
     <%@ include file="../include/header.jsp" %>
@@ -107,7 +117,8 @@
         <label for="content">내용</label>
         <div id="content">${b.content}</div>
         <div class="buttons">
-            <button class="list-btn" type="button" onclick="window.location.href='/board/list?pageNo=${s.pageNo}&type=${s.type}&keyword=${s.keyword}'">목록</button>
+            <button class="list-btn" type="button"
+                onclick="window.location.href='/board/list?pageNo=${s.pageNo}&type=${s.type}&keyword=${s.keyword}'">목록</button>
         </div>
 
         <!-- 댓글 영역 -->
@@ -128,11 +139,9 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="newReplyWriter" hidden>댓글 작성자</label>
-                                    <input id="newReplyWriter" name="replyWriter" type="text"
-                                         class="form-control" placeholder="작성자 이름"
-                                         style="margin-bottom: 6px;">
-                                    <button id="replyAddBtn" type="button"
-                                        class="btn btn-dark form-control">등록</button>
+                                    <input id="newReplyWriter" name="replyWriter" type="text" class="form-control"
+                                        placeholder="작성자 이름" style="margin-bottom: 6px;">
+                                    <button id="replyAddBtn" type="button" class="btn btn-dark form-control">등록</button>
                                 </div>
                             </div>
                         </div>
@@ -197,7 +206,34 @@
         </div>
 
         <!-- end replyModifyModal -->
-        
+
     </div>
+    <script>
+        // 댓글 관련 스크립트
+        // 원본 글 번호
+        const bno = '${b.boardNo}';
+
+        // 댓글 요청 URI
+        const URL = '/api/v1/replies';
+
+        // 댓글 목록 불러오기 함수
+        function getReplyList(page = 1) {
+            fetch(`\${URL}/\${bno}/page$\{page}`)
+            .then(res => res.json())
+            .then(responseResult => {
+                console.log(responseResult);
+            });
+        }
+
+        //======== 메인 실행부 ========//
+        (function() {
+            
+            // 첫 댓글 페이지 불러오기
+            getReplyList();
+            
+        })();
+    </script>
+
 </body>
+
 </html>
