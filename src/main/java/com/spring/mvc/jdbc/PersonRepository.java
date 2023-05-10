@@ -36,8 +36,8 @@ public class PersonRepository {
 
             // SQL을 실행해주는 객체 얻기
             String sql = "INSERT INTO person " +
-                            "(person_name, person_age) " +
-                        "VALUES (?, ?)";
+                    "(person_name, person_age) " +
+                    "VALUES (?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             // ?값 세팅하기
@@ -85,8 +85,8 @@ public class PersonRepository {
             conn.setAutoCommit(false); // 오토커밋 비활성화
 
             String sql = "UPDATE person " +
-                        "SET person_name=?, person_age=? " +
-                        "WHERE id=?";
+                    "SET person_name=?, person_age=? " +
+                    "WHERE id=?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setString(1, person.getPersonName());
@@ -128,7 +128,7 @@ public class PersonRepository {
             conn.setAutoCommit(false); // 오토커밋 비활성화
 
             String sql = "DELETE FROM person " +
-                            "WHERE id=?";
+                    "WHERE id=?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
 
             pstmt.setLong(1, id);
@@ -179,10 +179,7 @@ public class PersonRepository {
                 String name = rs.getString("person_name");
                 int age = rs.getInt("person_age");
 
-                Person p = new Person();
-                p.setId(id);
-                p.setPersonName(name);
-                p.setPersonAge(age);
+                Person p = new Person(id, name, age);
                 people.add(p);
             }
 

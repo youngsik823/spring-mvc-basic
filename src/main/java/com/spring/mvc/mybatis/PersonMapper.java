@@ -12,8 +12,8 @@ public interface PersonMapper {
 
     // 사람 정보 저장
     boolean save(Person p);
-
-    // 사람 정보 수정
+    
+    // 사람 정부 수정
     boolean change(Person p);
 
     // 사람 정보 삭제

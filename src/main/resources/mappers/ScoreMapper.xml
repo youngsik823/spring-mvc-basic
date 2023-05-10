@@ -2,18 +2,34 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace에는 인터페이스 풀 네임(패키지+인터페이스이름) -->
 <mapper namespace="com.spring.mvc.chap04.repository.ScoreMapper">
+    <insert id="save">
+        INSERT INTO tbl_score
+        (stu_name, kor, eng, math, total, average, grade)
+        VALUES (#{stuName}, #{kor}, #{eng}, #{math}, #{total}, #{average}, #{grade})
+    </insert>
+
+    <delete id="deleteByStuNum">
+        DELETE FROM tbl_score
+        WHERE stu_num = #{stuNum}
+    </delete>
+
+<!--    <update id="findByStuNum">-->
+<!--        UPDATE tbl_score-->
+<!--        (kor, eng, math)-->
+<!--        SET (#{kor}, #{eng}, #{math})-->
+<!--        WHERE stu_num = #{stuNum}-->
+<!--    </update>-->
 
 <!--    <resultMap id="sc" type="com.spring.mvc.chap04.entity.Score">-->
-<!--        <result column="stu_name" property="stuName" />-->
-<!--        <result column="stu_num" property="stuNum" />-->
+<!--    <result property="stuName" column="stu_name" />-->
+<!--    <result property="stuNum" column="stu_num" />-->
 <!--    </resultMap>-->
 
     <select id="findAll" resultType="score">
-        SELECT
-            *
-        FROM tbl_score
-        <if test="sort == 'num'">
+        SELECT * FROM tbl_score
+        <if test="sort == 'num'"> <!-- 동적 SQL-->
             ORDER BY stu_num
         </if>
         <if test="sort == 'name'">
@@ -24,23 +40,11 @@
         </if>
     </select>
 
-    <insert id="save">
-        INSERT INTO tbl_score
-         (stu_name, kor, eng, math, total, average, grade)
-        VALUES (#{stuName}, #{kor},
-                #{eng}, #{math}, #{total},
-                #{average}, #{grade})
-    </insert>
-
-    <delete id="deleteByStuNum">
-        DELETE FROM tbl_score
-        WHERE stu_num=#{stuNum}
-    </delete>
-
     <select id="findByStuNum" resultType="score">
-        SELECT *
-        FROM tbl_score
-        WHERE stu_num=#{stuNum}
+        SELECT * FROM tbl_score
+        WHERE stu_num = #{stuNum}
     </select>
-
 </mapper>
+
+
+

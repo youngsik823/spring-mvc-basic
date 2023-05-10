@@ -12,7 +12,9 @@ public interface BoardMapper {
 
     // 게시물 목록 조회
 //    List<Board> findAll();
-    List<Board> findAll(Search page);
+
+
+    List<Board> findAll(Page page);
 
 
     // 게시물 상세 조회
@@ -26,6 +28,8 @@ public interface BoardMapper {
 
     // 조회수 상승
     void upViewCount(int boardNo);
+
+    boolean modify(Board board);
 
     // 총 게시물 수 조회하기
     int count(Search search);
