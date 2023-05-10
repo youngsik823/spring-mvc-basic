@@ -302,6 +302,17 @@
         };
 
         // 회원가입 버튼 클릭 이벤트
+        document.getElementById('signup-btn').onclick = e => {
+
+            // 5개의 입력칸이 모두 통과되었을 경우 폼을 서브밋
+            const $form = document.getElementById('signUpForm');
+
+            if (!checkResultList.includes(false)) {
+                $form.submit();
+            } else {
+                alert('입력란을 다시 확인하세요!');
+            }
+        }
     </script>
 
 </body>
