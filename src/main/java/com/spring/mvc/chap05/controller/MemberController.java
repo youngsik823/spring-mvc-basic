@@ -1,5 +1,6 @@
 package com.spring.mvc.chap05.controller;
 
+import com.spring.mvc.chap05.dto.LoginRequestDTO;
 import com.spring.mvc.chap05.dto.SignUpRequestDTO;
 import com.spring.mvc.chap05.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -55,7 +56,7 @@ public class MemberController {
     }
     // 로그인 검증 요청
     @PostMapping("/sign-in")
-    public void signIn(String s) {
-
+    public void signIn(LoginRequestDTO dto) {
+        log.info("/members/sign-in POST ! - {}", dto);
     }
 }
