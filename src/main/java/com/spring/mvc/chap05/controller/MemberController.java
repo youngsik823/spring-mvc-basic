@@ -28,6 +28,7 @@ public class MemberController {
     @PostMapping("/sign-up")
     public void signUp(SignUpRequestDTO dto) {
     log.info("/members/sign-up POST ! - {}", dto);
+        boolean flag = memberService.join(dto);
 
     }
 }
