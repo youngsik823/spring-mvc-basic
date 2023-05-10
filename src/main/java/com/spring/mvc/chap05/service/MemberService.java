@@ -6,6 +6,7 @@ import com.spring.mvc.chap05.repository.MemberMapper;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 public class MemberService {
 
     private final MemberMapper memberMapper;
+    private final PasswordEncoder encoder;
 
     // 회원가입 처리 서비스
     public void join(SignUpRequestDTO dto) {
@@ -23,7 +25,7 @@ public class MemberService {
                 .account(dto.getAccount())
                 .email(dto.getEmail())
                 .name(dto.getName())
-                .password(dto.getPassword())
+                .password(encoder.encode(dto.getPassword()))
                 .build();
         // 매퍼에게 회원정보 전달해서 저장명령
         memberMapper.save(member);
