@@ -28,10 +28,11 @@ public class MemberController {
     }
     // 회원가입 처리 요청
     @PostMapping("/sign-up")
-    public void signUp(SignUpRequestDTO dto) {
+    public String signUp(SignUpRequestDTO dto) {
     log.info("/members/sign-up POST ! - {}", dto);
         boolean flag = memberService.join(dto);
 
+        return "redirect:/board/list";
     }
 
     // 아이디, 이메일 중복검사
