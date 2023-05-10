@@ -58,5 +58,7 @@ public class MemberController {
     @PostMapping("/sign-in")
     public void signIn(LoginRequestDTO dto) {
         log.info("/members/sign-in POST ! - {}", dto);
+
+        memberService.authenticate(dto);
     }
 }
