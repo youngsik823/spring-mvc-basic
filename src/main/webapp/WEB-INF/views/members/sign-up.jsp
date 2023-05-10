@@ -2,20 +2,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <title>Insert title here</title>
 
-<%@ include file="../include/static-head.jsp" %>
+    <%@ include file="../include/static-head.jsp" %>
 
-<style>
-    .container.wrap {
-        margin-top: 200px;
-        margin-bottom: 200px;
-    }
-</style>
+    <style>
+        .container.wrap {
+            margin-top: 200px;
+            margin-bottom: 200px;
+        }
+    </style>
 
 </head>
+
 <body>
 
     <%@ include file="../include/header.jsp" %>
@@ -128,15 +130,24 @@
     <script>
         // 회원가입 입력값 검증 처리
 
+        // 아이디 검사 정규표현식
+        const accountPattern = /^[a-zA-Z0-9]{4,14}$/;
+        
         // 아이디 입력값 검증
         const $idInput = document.getElementById('user_id');
 
         $idInput.onkeyup = e => {
-            const idValue = $idInput.value;
-            console.log(idValue);
-        };
 
+            const idValue = $idInput.value;
+            // console.log(idValue);
+
+            if (idValue.trim() === '') {
+                $idInput.style.borderColor = 'red';
+                document.getElementById('idChk').innerHTML = '<b style="color: red;">[아이디는 필수값입니다!]</b>';
+            }
+        };
     </script>
 
 </body>
+
 </html>
