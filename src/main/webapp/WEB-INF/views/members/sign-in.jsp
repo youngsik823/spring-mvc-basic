@@ -108,6 +108,12 @@
         const serverMessage = '${msg}';
         console.log('msg: ' + serverMessage);
 
+        if(serverMessage === 'NO_ACC') {
+            alert('회워가입부터 하세요~~ 제발~~');
+        } else if (serverMessage === 'NO_PW') {
+            alert('비밀번호가 틀렸어!!');
+        }
+
     </script>
     
 </body>

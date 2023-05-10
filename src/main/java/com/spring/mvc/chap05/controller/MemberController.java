@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import static com.spring.mvc.chap05.service.LoginResult.*;
 
@@ -60,7 +61,8 @@ public class MemberController {
     }
     // 로그인 검증 요청
     @PostMapping("/sign-in")
-    public String signIn(LoginRequestDTO dto, Model model) {
+    // 리다이렉션시 2번째 응답에 데이터를 보내기 위함
+    public String signIn(LoginRequestDTO dto, RedirectAttributes ra) {
         log.info("/members/sign-in POST ! - {}", dto);
 
         LoginResult result = memberService.authenticate(dto);
@@ -69,8 +71,9 @@ public class MemberController {
         if (result == SUCCESS) {
             return "redirect:/";
         }
-
-        model.addAttribute("msg", result);
+        
+        // 1회용으로 쓰고 버릴 데이터
+        ra.addFlashAttribute("msg", result);
         // jsp로 실패를 보내준다.
 
         // 로그인 실패시
@@ -78,6 +81,6 @@ public class MemberController {
         // 요청 2번
         // 포워딩으로 하면 경로를 가는거다
         // 요청 1번
-        return "members/sign-in";
+        return "redirect:/members/sign-in";
     }
 }
