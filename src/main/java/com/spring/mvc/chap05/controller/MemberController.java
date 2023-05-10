@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,7 +60,7 @@ public class MemberController {
     }
     // 로그인 검증 요청
     @PostMapping("/sign-in")
-    public String signIn(LoginRequestDTO dto) {
+    public String signIn(LoginRequestDTO dto, Model model) {
         log.info("/members/sign-in POST ! - {}", dto);
 
         LoginResult result = memberService.authenticate(dto);
@@ -69,7 +70,14 @@ public class MemberController {
             return "redirect:/";
         }
 
+        model.addAttribute("msg", result);
+        // jsp로 실패를 보내준다.
+
         // 로그인 실패시
-        return "redirect:/members/sign-in";
+        // redirect는 요청 URL 적는다 /sign-in
+        // 요청 2번
+        // 포워딩으로 하면 경로를 가는거다
+        // 요청 1번
+        return "members/sign-in";
     }
 }

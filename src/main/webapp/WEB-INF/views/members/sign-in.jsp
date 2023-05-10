@@ -103,5 +103,11 @@
             </div>
         </div>
     </div>
+
+    <script>
+        const serverMessage = '${msg}';
+        console.log('msg: ' + serverMessage);
+
+    </script>
     
 </body>
