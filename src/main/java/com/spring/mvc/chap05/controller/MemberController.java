@@ -2,6 +2,7 @@ package com.spring.mvc.chap05.controller;
 
 import com.spring.mvc.chap05.dto.LoginRequestDTO;
 import com.spring.mvc.chap05.dto.SignUpRequestDTO;
+import com.spring.mvc.chap05.service.LoginResult;
 import com.spring.mvc.chap05.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import static com.spring.mvc.chap05.service.LoginResult.*;
 
 @Controller
 @Slf4j
@@ -56,9 +59,17 @@ public class MemberController {
     }
     // 로그인 검증 요청
     @PostMapping("/sign-in")
-    public void signIn(LoginRequestDTO dto) {
+    public String signIn(LoginRequestDTO dto) {
         log.info("/members/sign-in POST ! - {}", dto);
 
-        memberService.authenticate(dto);
+        LoginResult result = memberService.authenticate(dto);
+
+        // 로그인 성공시
+        if (result == SUCCESS) {
+            return "redirect:/";
+        }
+
+        // 로그인 실패시
+        return "redirect:/members/sign-in";
     }
 }
