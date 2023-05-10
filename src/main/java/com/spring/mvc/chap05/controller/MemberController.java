@@ -1,6 +1,8 @@
 package com.spring.mvc.chap05.controller;
 
 import com.spring.mvc.chap05.dto.SignUpRequestDTO;
+import com.spring.mvc.chap05.service.MemberService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @Slf4j
 @RequestMapping("/members")
+@RequiredArgsConstructor
 public class MemberController {
+
+    private final MemberService memberService;
     
     // 회원 가입 요청
     // 회원가입 양식 요청
