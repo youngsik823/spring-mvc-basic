@@ -30,6 +30,14 @@ public class MemberService {
 
         // 매퍼에게 회원정보 전달해서 저장명령
         return memberMapper.save(member);
+    }
+
+    // 중복검사 서비스 처리
+    public boolean checkSignUpValue(String type, String keyword) {
+
+        int flagNum = memberMapper.isDuplicate(type, keyword);
+
+        return flagNum == 1;
 
     }
 }

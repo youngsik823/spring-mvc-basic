@@ -40,6 +40,9 @@ public class MemberController {
     @ResponseBody
     public ResponseEntity<?> check(String type, String keyword) {
         log.info("/members/check?type={}&keyword={} ASYNC GET!", type, keyword);
-        return null;
+
+        boolean flag = memberService.checkSignUpValue(type, keyword);
+
+        return ResponseEntity.ok().body(flag);
     }
 }
