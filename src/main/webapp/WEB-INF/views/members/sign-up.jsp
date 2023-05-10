@@ -131,6 +131,11 @@
         // 아이디 입력값 검증
         const $idInput = document.getElementById('user_id');
 
+        $idInput.onkeyup = e => {
+            const idValue = $idInput.value;
+            console.log(idValue);
+        };
+
     </script>
 
 </body>
