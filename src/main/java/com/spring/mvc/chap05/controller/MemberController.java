@@ -46,4 +46,16 @@ public class MemberController {
 
         return ResponseEntity.ok().body(flag);
     }
+
+    // 로그인 화면(양식) 요청
+    @GetMapping("/sign-in")
+    public String signIn() {
+        log.info("/members/sign-in GET! - forwarding to jsp");
+        return "/members/sign-in";
+    }
+    // 로그인 검증 요청
+    @PostMapping("/sign-in")
+    public void signIn(String s) {
+
+    }
 }
