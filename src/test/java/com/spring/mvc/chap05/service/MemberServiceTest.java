@@ -14,6 +14,7 @@ class MemberServiceTest {
     @Autowired
     MemberService memberService;
 
+
    @Test
    @DisplayName("SignUpDTO를 전달하면 회원가입에 성공해야 한다.")
     void joinTest() {
