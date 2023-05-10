@@ -132,7 +132,7 @@
 
         // 아이디 검사 정규표현식
         const accountPattern = /^[a-zA-Z0-9]{4,14}$/;
-        
+
         // 아이디 입력값 검증
         const $idInput = document.getElementById('user_id');
 
@@ -144,8 +144,16 @@
             if (idValue.trim() === '') {
                 $idInput.style.borderColor = 'red';
                 document.getElementById('idChk').innerHTML = '<b style="color: red;">[아이디는 필수값입니다!]</b>';
+            } else if (!accountPattern.test(idValue)) {
+                $idInput.style.borderColor = 'red';
+                document.getElementById('idChk').innerHTML =
+                    '<b style="color: red;">[아이디는 4~14글자의 영문,숫자로 입력하세요.]</b>';
+            } else {
+                $idInput.style.borderColor = 'skyblue';
+                document.getElementById('idChk').innerHTML = '<b style="color: skyblue;">[사용가능한 아이디입니다.]</b>';
             }
         };
+        
     </script>
 
 </body>
