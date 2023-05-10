@@ -149,11 +149,14 @@
                 document.getElementById('idChk').innerHTML =
                     '<b style="color: red;">[아이디는 4~14글자의 영문,숫자로 입력하세요.]</b>';
             } else {
+
+                fetch('/members/check?type=account&keyword=' +idValue);
+
                 $idInput.style.borderColor = 'skyblue';
                 document.getElementById('idChk').innerHTML = '<b style="color: skyblue;">[사용가능한 아이디입니다.]</b>';
             }
         };
-        
+
     </script>
 
 </body>
