@@ -18,7 +18,7 @@ public class MemberService {
     private final PasswordEncoder encoder;
 
     // 회원가입 처리 서비스
-    public void join(SignUpRequestDTO dto) {
+    public boolean join(final SignUpRequestDTO dto) {
 
         // dto를 entity로 변환
         Member member = Member.builder()
@@ -27,8 +27,9 @@ public class MemberService {
                 .name(dto.getName())
                 .password(encoder.encode(dto.getPassword()))
                 .build();
+
         // 매퍼에게 회원정보 전달해서 저장명령
-        memberMapper.save(member);
+        return memberMapper.save(member);
 
     }
 }
