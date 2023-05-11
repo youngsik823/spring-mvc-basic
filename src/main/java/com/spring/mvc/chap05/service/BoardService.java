@@ -18,7 +18,8 @@ import static java.util.stream.Collectors.*;
 public class BoardService {
 
 //    private final BoardRepository boardRepository;
-    private final BoardMapper boardRepository;
+    private
+BoardMapper boardRepository;
 
     // 중간처리 기능 자유롭게 사용
     // 목록 중간처리

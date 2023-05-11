@@ -69,6 +69,7 @@ public class MemberController {
 
         // 로그인 성공시
         if (result == SUCCESS) {
+            ra.addFlashAttribute("flag", true);
             return "redirect:/";
         }
         
