@@ -10,7 +10,7 @@
 
 <style>
     #main-title {
-        margin-top: 200px auto;
+        margin-top: 200px;
         font-size: 40px;
         font-weight: 700;
         color: orange;

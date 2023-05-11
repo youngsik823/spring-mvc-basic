@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import static com.spring.mvc.chap05.service.LoginResult.*;
 
 @Controller
@@ -62,7 +65,9 @@ public class MemberController {
     // 로그인 검증 요청
     @PostMapping("/sign-in")
     // 리다이렉션시 2번째 응답에 데이터를 보내기 위함
-    public String signIn(LoginRequestDTO dto, RedirectAttributes ra) {
+    public String signIn(LoginRequestDTO dto, RedirectAttributes ra,
+                         HttpServletResponse response) {
+//        Servlet은 HttpServletResponse객체에 Content Type, 응답코드, 응답 메시지등을 담아서 전송함
         log.info("/members/sign-in POST ! - {}", dto);
 
         LoginResult result = memberService.authenticate(dto);
@@ -70,6 +75,17 @@ public class MemberController {
         // 로그인 성공시
         if (result == SUCCESS) {
             ra.addFlashAttribute("flag", true);
+            
+            // 쿠키 만들기
+            Cookie loginCookie = new Cookie("login", "지워니");
+            // 쿠키 셋팅
+            loginCookie.setPath("/");
+            loginCookie.setMaxAge(60 * 60 * 24); // 하루 지나면 자동 삭제됨
+            // 쿠키는 무조건 시간 설정을 해야한다.
+
+            // 쿠키를 응답시에 실어서 클라이언트에게 전송
+            response.addCookie(loginCookie);
+
             return "redirect:/";
         }
         
